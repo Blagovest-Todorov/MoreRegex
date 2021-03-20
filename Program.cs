@@ -7,7 +7,6 @@ namespace RegularEx
     {
         static void Main(string[] args)
         {
-
             string pattern = @"\d{2}([-\/])\w{3}\1[0-9]{4}";
             string text = @"13/Feb/2020 33-Jan-2020, 13/Feb-2020";
 

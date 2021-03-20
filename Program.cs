@@ -1,53 +1,25 @@
 ﻿using System;
-using System.Linq;
+using System.Text.RegularExpressions;
 
-namespace MoreExersizesString
+namespace RegularEx
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int[] keys = Console.ReadLine()  
-                .Split(' ')
-                .Select(int.Parse)
-                .ToArray();  //read input of keys
 
-            while (true)
+            string pattern = @"\d{2}([-\/])\w{3}\1[0-9]{4}";
+            string text = @"13/Feb/2020 33-Jan-2020, 13/Feb-2020";
+
+            Regex regex = new Regex(pattern);
+
+            MatchCollection matches = regex.Matches(text);
+
+            foreach (Match match in matches)
             {
-                string line = Console.ReadLine();
-
-                if (line == "find")
-                {
-                    //ToDo
-                    break;
-                }
-
-                for (int i = 0; i < line.Length; i++)
-                {
-                   char[] letters = line.ToCharArray();                  
-                   char currChar = line[i];
-                   
-
-                    if (letters.Length == keys.Length)
-                    {
-                        int currKeyValue = (int)(keys[i]);
-                        int newCurChar = (int)currChar - currKeyValue;
-                        letters[i] = (char)newCurChar;
-                    }
-                    else if (letters.Length > keys.Length)
-                    {
-                        int currKeyValue = (int)(keys[i % keys.Length]);
-                        int newCurChar = (int)currChar - currKeyValue;
-                        letters[i] = (char)newCurChar;
-                    }
-
-                    Console.WriteLine(string.Join("", letters));
-                }
-
-                // 1 2 1 3
-                // ikegfp'jpne)bv=41P83X@
-                
-            }
+                Console.WriteLine(match.Value);
+                Console.WriteLine(match.Groups[1].Value);
+            }   
         }
     }
 }
